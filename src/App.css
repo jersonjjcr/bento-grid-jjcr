@@ -1,0 +1,890 @@
+/* ================================================================
+   🎨 BENTO GRID DASHBOARD - CSS COMPLETO REORGANIZADO
+   ================================================================ */
+
+/* ================================================================
+   📋 1. RESET Y ESTILOS GLOBALES
+   ================================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  overflow: hidden;
+}
+
+/* ================================================================
+   🏗️ 2. APLICACIÓN BASE
+   ================================================================ */
+.app {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  padding: clamp(0.5rem, 2vw, 2rem);
+  background: linear-gradient(135deg, #ffffff 0%, #3bffce 50%, #119965 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* ================================================================
+   🔲 3. BENTO GRID - LAYOUT PRINCIPAL
+   ================================================================ */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    "brand calendar profiles profiles"
+    "price services message message"
+    "task services message message";
+  gap: clamp(0.8rem, 1.5vw, 1.5rem);
+  max-width: min(95vw, 1800px);
+  margin: 0 auto;
+  width: 100%;
+  height: 85vh;
+  max-height: 85vh;
+}
+
+/* Responsive para tablets */
+@media (max-width: 1023px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas:
+      "brand calendar"
+      "profiles profiles"
+      "price services"
+      "task message";
+    height: 90vh;
+  }
+}
+
+/* Responsive para móviles */
+@media (max-width: 767px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-areas:
+      "brand"
+      "calendar"
+      "profiles"
+      "price"
+      "services"
+      "task"
+      "message";
+    height: auto;
+    min-height: 100vh;
+  }
+}
+
+/* ================================================================
+   🔳 4. GRID ITEMS - ESTILOS BASE
+   ================================================================ */
+.grid-item {
+  border-radius: clamp(12px, 2vw, 20px);
+  padding: clamp(0.8rem, 2vw, 1.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  position: relative;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  min-height: auto;
+}
+
+.grid-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.grid-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.2),
+    0 6px 20px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* ================================================================
+   🎨 5. BACKGROUNDS ESPECÍFICOS POR ITEM
+   ================================================================ */
+.brand-item {
+  grid-area: brand;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.calendar-item {
+  grid-area: calendar;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.profiles-item {
+  grid-area: profiles;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.price-item {
+  grid-area: price;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.services-item {
+  grid-area: services;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.brand-message-item {
+  grid-area: message;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.task-item {
+  grid-area: task;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ================================================================
+   📋 6. BRAND CARD - COMPONENTE DE LOGO
+   ================================================================ */
+.brand-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-logo {
+  width: clamp(50px, 8vw, 80px);
+  height: clamp(50px, 8vw, 80px);
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: clamp(12px, 3vw, 20px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+}
+
+.brand-logo:hover .logo-image {
+  transform: scale(1.05);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ================================================================
+   📅 7. CALENDAR CARD - COMPONENTE DE CALENDARIO
+   ================================================================ */
+.calendar-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+}
+
+.calendar-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: clamp(8px, 1.5vw, 12px);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.calendar-header {
+  background: #2196F3;
+  color: white;
+  padding: clamp(0.4rem, 1vw, 0.6rem);
+  text-align: center;
+  position: relative;
+}
+
+.calendar-title {
+  font-size: clamp(0.8rem, 1.8vw, 1rem);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: clamp(0.2rem, 0.5vw, 0.3rem);
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  cursor: pointer;
+  padding: clamp(0.2rem, 0.5vw, 0.3rem);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.month-year {
+  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  font-weight: 600;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+.weekday {
+  padding: clamp(0.3rem, 0.8vw, 0.5rem);
+  text-align: center;
+  font-size: clamp(0.6rem, 1.3vw, 0.75rem);
+  font-weight: bold;
+  color: #333;
+  background: #e0e0e0;
+}
+
+.weekday.sunday {
+  background: #ffebee;
+  color: #d32f2f;
+}
+
+.weekday.saturday {
+  background: #e8eaf6;
+  color: #3f51b5;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  flex: 1;
+  border-collapse: collapse;
+}
+
+.calendar-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid #e0e0e0;
+  background: transparent;
+  transition: all 0.2s ease;
+  position: relative;
+  min-height: clamp(20px, 4vw, 30px);
+}
+
+.calendar-day:hover {
+  background: #f0f8ff;
+  transform: scale(1.05);
+}
+
+.calendar-day.other-month {
+  color: #bbb;
+  background: #fafafa;
+}
+
+.calendar-day.today {
+  background: #2196F3;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 0 2px #1976D2;
+}
+
+.calendar-day.selected {
+  background: #4CAF50;
+  color: white;
+  font-weight: bold;
+}
+
+.calendar-day.sunday {
+  color: #d32f2f;
+  background: #ffebee;
+}
+
+.calendar-day.saturday {
+  color: #3f51b5;
+  background: #e8eaf6;
+}
+
+.calendar-day.sunday.other-month,
+.calendar-day.saturday.other-month {
+  background: #fafafa;
+  color: #bbb;
+}
+
+.calendar-footer {
+  padding: clamp(0.3rem, 0.8vw, 0.5rem);
+  text-align: center;
+  background: #f5f5f5;
+  border-top: 1px solid #ddd;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.calendar-footer:hover {
+  background: #e0e0e0;
+}
+
+.calendar-link {
+  font-size: clamp(0.6rem, 1.3vw, 0.75rem);
+  color: #2196F3;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.calendar-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .calendar-day {
+    font-size: clamp(0.65rem, 3vw, 0.8rem);
+    min-height: clamp(18px, 6vw, 25px);
+  }
+  
+  .weekday {
+    padding: clamp(0.2rem, 1.5vw, 0.4rem);
+    font-size: clamp(0.55rem, 2.5vw, 0.7rem);
+  }
+}
+
+
+/* ================================================================
+   💬 8. PROFILES CARD - APLICACIONES DE COMUNICACIÓN
+   ================================================================ */
+.profiles-card.communication-apps-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.8rem, 2vw, 1.5rem);
+}
+
+.profiles-grid.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: clamp(0.8rem, 1.5vw, 1.2rem);
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-items: center;
+}
+
+.profile-item.app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.8rem, 1.5vw, 1.2rem);
+  border-radius: clamp(12px, 2vw, 16px);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  width: 100%;
+  min-height: clamp(80px, 15vw, 120px);
+  text-decoration: none;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-item.app-item:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.app-logo {
+  width: clamp(30px, 6vw, 50px);
+  height: clamp(30px, 6vw, 50px);
+  margin-bottom: clamp(0.3rem, 1vw, 0.5rem);
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.app-name {
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  font-weight: 500;
+  text-align: center;
+}
+
+/* ================================================================
+   💰 9. PRICE CARD - COMPONENTE DE PRECIO/ESTADÍSTICAS
+   ================================================================ */
+.price-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.price-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.progress-ring-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(0.5rem, 1vw, 1rem);
+}
+
+.progress-ring {
+  width: clamp(60px, 12vw, 100px);
+  height: clamp(60px, 12vw, 100px);
+  transform: rotate(-90deg);
+}
+
+.progress-ring-bg,
+.progress-ring-fill {
+  fill: none;
+  stroke-width: 4;
+}
+
+.progress-ring-bg {
+  stroke: rgba(255, 255, 255, 0.2);
+}
+
+.progress-ring-fill {
+  stroke: #00ff88;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.5s ease;
+}
+
+.progress-text {
+  position: absolute;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: bold;
+  color: white;
+}
+
+.price-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price-label {
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  opacity: 0.8;
+  margin-bottom: 0.2rem;
+}
+
+.price-subtitle {
+  font-size: clamp(0.6rem, 1.2vw, 0.8rem);
+  opacity: 0.6;
+}
+
+/* ================================================================
+   🔧 10. SERVICES CARD - COMPONENTE DE SERVICIOS
+   ================================================================ */
+.services-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.services-icons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: clamp(0.5rem, 1vw, 0.8rem);
+  width: 100%;
+  height: 100%;
+  max-width: clamp(150px, 25vw, 200px);
+  max-height: clamp(100px, 20vw, 140px);
+}
+
+.service-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: clamp(8px, 2vw, 12px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-icon::before {
+  font-size: clamp(16px, 3vw, 24px);
+  transition: transform 0.3s ease;
+}
+
+.service-icon:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.service-icon:hover::before {
+  transform: scale(1.2);
+}
+
+.heart-icon::before { content: '❤️'; }
+.gift-icon::before { content: '🎁'; }
+.user-icon::before { content: '👤'; }
+.chat-icon::before { content: '💬'; }
+.location-icon::before { content: '📍'; }
+.star-icon::before { content: '⭐'; }
+
+/* ================================================================
+   ✅ 11. TASK CARD - COMPONENTE DE TAREAS
+   ================================================================ */
+.task-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-button {
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: clamp(12px, 2vw, 16px);
+  padding: clamp(1rem, 2vw, 1.5rem);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1vw, 0.8rem);
+  font-size: clamp(0.8rem, 1.8vw, 1rem);
+  font-weight: 500;
+  color: #333;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.task-button:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.arrow {
+  font-size: clamp(14px, 2.5vw, 18px);
+  transition: transform 0.3s ease;
+}
+
+.task-button:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* ================================================================
+   📝 12. BRAND MESSAGE CARD - TO-DO LIST COMPONENT
+   ================================================================ */
+.brand-message-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(0.8rem, 2vw, 1.5rem);
+  text-align: center;
+  color: #8B1538;
+  position: relative;
+  overflow: hidden;
+}
+
+/* To-Do List Styles */
+.todo-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1vw, 0.8rem);
+}
+
+.todo-header {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.3rem, 0.5vw, 0.5rem);
+}
+
+.todo-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-title h3 {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  font-weight: 600;
+  color: #8B1538;
+}
+
+.todo-stats {
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  opacity: 0.8;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(139, 21, 56, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8B1538, #ff6b6b);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.todo-input-section {
+  display: flex;
+  gap: clamp(0.3rem, 0.5vw, 0.5rem);
+  margin-bottom: clamp(0.5rem, 1vw, 0.8rem);
+}
+
+.todo-input {
+  flex: 1;
+  padding: clamp(0.4rem, 1vw, 0.6rem);
+  border: 1px solid rgba(139, 21, 56, 0.3);
+  border-radius: clamp(6px, 1vw, 8px);
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.todo-input:focus {
+  border-color: #8B1538;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 0 2px rgba(139, 21, 56, 0.1);
+}
+
+.add-btn {
+  padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.6rem, 1.2vw, 0.8rem);
+  background: #8B1538;
+  color: white;
+  border: none;
+  border-radius: clamp(6px, 1vw, 8px);
+  cursor: pointer;
+  font-size: clamp(0.8rem, 1.6vw, 1rem);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.add-btn:hover {
+  background: #a01940;
+  transform: scale(1.05);
+}
+
+.todo-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.3rem, 0.5vw, 0.4rem);
+  max-height: 60%;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(0.4rem, 0.8vw, 0.6rem);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: clamp(6px, 1vw, 8px);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(139, 21, 56, 0.1);
+}
+
+.todo-item:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateX(2px);
+}
+
+.todo-item.completed {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.todo-content {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.3rem, 0.6vw, 0.5rem);
+  flex: 1;
+}
+
+.todo-checkbox {
+  width: clamp(16px, 3vw, 20px);
+  height: clamp(16px, 3vw, 20px);
+  border: 2px solid #8B1538;
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(10px, 2vw, 12px);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.todo-checkbox.checked {
+  background: #8B1538;
+}
+
+.todo-text {
+  flex: 1;
+  text-align: left;
+  font-size: clamp(0.65rem, 1.3vw, 0.8rem);
+  color: #333;
+}
+
+.priority-badge {
+  font-size: clamp(10px, 2vw, 12px);
+}
+
+.delete-btn {
+  width: clamp(20px, 4vw, 24px);
+  height: clamp(20px, 4vw, 24px);
+  border: none;
+  background: rgba(255, 69, 69, 0.1);
+  color: #ff4545;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: clamp(12px, 2.5vw, 14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 69, 69, 0.2);
+  transform: scale(1.1);
+}
+
+.empty-state {
+  text-align: center;
+  color: #8B1538;
+  opacity: 0.7;
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* ================================================================
+   📱 13. RESPONSIVE ADJUSTMENTS
+   ================================================================ */
+@media (max-width: 768px) {
+  .grid-item {
+    padding: clamp(0.6rem, 3vw, 1rem);
+  }
+  
+  .todo-list {
+    max-height: 50%;
+  }
+  
+  .services-icons {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+  
+  .profiles-grid.apps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .bento-grid {
+    gap: clamp(0.5rem, 2vw, 1rem);
+  }
+  
+  .grid-item {
+    padding: clamp(0.5rem, 2vw, 0.8rem);
+  }
+  
+  .profiles-grid.apps-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .services-icons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
